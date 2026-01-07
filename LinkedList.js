@@ -73,7 +73,63 @@ export class LinkedList {
         return "Node not found in the provided index.";
     }
     // pop removes the last element from the list
+    pop() {
+        if (this.head == null) {
+            return null;
+        } else {
+            const nodeRemoved = this.tail;
+            let counter = 1;
+            let actualNode = this.head;
+            while (actualNode != null) {
+                if (counter === (this.size - 1)) {
+                    actualNode.nextNode = null;
+                    this.tail = actualNode;
+                    this.size--;
+                    return nodeRemoved;
+                }
+                const next = actualNode.nextNode;
+                actualNode = next;
+                counter++;
+            }
+        }
+    }
     // contains(value) returns true if the passed in value is in the list and otherwise returns false.
+    contains(value) {
+        let actualNode = this.head;
+        while (actualNode != null) {
+            if (actualNode.value === value) {
+                return true;
+            }
+            const next = actualNode.nextNode;
+            actualNode = next;
+        }
+        return false;
+    }
     // find(value) returns the index of the node containing value, or null if not found.
+    find(value) {
+        let counter = 1;
+        let actualNode = this.head;
+        while (actualNode != null) {
+            if (actualNode.value === value) {
+                return counter;
+            }
+            const next = actualNode.nextNode;
+            actualNode = next;
+            counter++;
+        }
+        return null;
+    }
     // toString represents your LinkedList objects as strings, so you can print them out and preview them in the console. The format should be: ( value ) -> ( value ) -> ( value ) -> null
+    toString() {
+        let actualNode = this.head;
+        let returnedList = "";
+        while (actualNode != null) {
+            returnedList += `( ${actualNode.value} )`;
+            returnedList += " -> ";
+            const next = actualNode.nextNode;
+            actualNode = next;
+        }
+        returnedList += " null";
+        return returnedList;
+    }
 }

@@ -14,16 +14,39 @@ list.prepend("cow");
 list.prepend("tiger");
 list.prepend("lion");
 
-function printTest(list) {
-    let next = list.head;
-    while (next != null) {
-        console.log(`Node => ${next.value}`);
-        const otherNode = next.nextNode;
-        next = otherNode;
-    }
-}
-
-printTest(list);
+// function printTest(list) {
+//     let next = list.head;
+//     while (next != null) {
+//         console.log(`Node => ${next.value}`);
+//         const otherNode = next.nextNode;
+//         next = otherNode;
+//     }
+// }
+console.log(list.toString());
+console.log("Test size function >>")
+console.log(list.size)
+console.log("Test head function >>")
+console.log(list.head)
+console.log("Test tail function >>")
+console.log(list.tail)
+console.log("Test at function >>")
+console.log("At index 4 =>")
 console.log(list.at(4))
+console.log("At index 37 =>")
 console.log(list.at(37))
-// console.log(list);
+console.log("Test pop function >>")
+console.log("Node removed =>")
+console.log(list.pop())
+console.log(`New tail =>`)
+console.log(list.tail)
+console.log(`New size => ${list.size}`)
+console.log(`New list =>`)
+console.log(list.toString());
+console.log("Test contains function >>")
+console.log(`Contains dog? ${list.contains("dog")}`)
+console.log(`Contains ball? ${list.contains("ball")}`)
+console.log("Test find function >>")
+console.log(`Find dog => ${list.find("dog")}`)
+console.log(`Find ball => ${list.find("ball")}`)
+console.log("Test toString function >>")
+console.log(list.toString());
