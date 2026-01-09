@@ -60,10 +60,10 @@ export class LinkedList {
     }
     // at(index) returns the node at the given index
     at(index) {
-        let counter = 0;
+        let counter = 1;
         let actualNode = this.head;
         while (actualNode != null) {
-            if (counter === (index - 1)) {
+            if (counter === index) {
                 return actualNode;
             }
             const next = actualNode.nextNode;
@@ -131,5 +131,102 @@ export class LinkedList {
         }
         returnedList += " null";
         return returnedList;
+    }
+
+    // Extra functions
+    // insertAt(index, ...values) should insert new nodes with the given values at the given index.
+    check(index) {
+        if (!(index >= 1 && index <= this.size)) {
+            throw new RangeError(`The argument must be between 1 and ${this.size}.`);
+        }
+    }
+    insertAt(index, ...values) {
+        try {
+            this.check(index)
+            let counter = 1;
+            let actualNode = this.head;
+            while (actualNode != null) {
+                if (counter === (index - 1) || index === 1) {
+                    let insertedNode = null;
+                    let nodeAfterInsertion = actualNode.nextNode;
+                    values.forEach(value => {
+                        const node = new Node(value);
+                        if (index === this.size) {
+                            nodeAfterInsertion.nextNode = node;
+                            insertedNode = node;
+                            this.size++;
+                        } else if (counter === 1 && index === 1) {
+                            this.head = node;
+                            insertedNode = node;
+                            this.size++;
+                            counter++;
+                        } else {
+                            if (insertedNode == null) {
+                                actualNode.nextNode = node;
+                            } else {
+                                insertedNode.nextNode = node;
+                            }
+                            insertedNode = node;
+                            this.size++;
+                        }
+                    });
+                    if (this.tail.nextNode != null) {
+                        this.tail = insertedNode;
+                    } else {
+                        insertedNode.nextNode = index === 1 ? actualNode : nodeAfterInsertion;
+                    }
+                    return true;
+                }
+                const next = actualNode.nextNode;
+                actualNode = next;
+                counter++;
+            }
+        } catch (error) {
+            if (error instanceof RangeError) {
+                console.error("Caught a RangeError:", error.message);
+            } else {
+                // Re-throw other, unexpected errors
+                throw error;
+            }
+        }
+    }
+    // removeAt(index) that removes the node at the given index.
+    removeAt(index) {
+        try {
+            this.check(index)
+            let counter = 1;
+            let actualNode = this.head;
+            while (actualNode != null) {
+                if (counter === (index - 1) || index === 1) {
+                    let nodeRemoved = null;
+                    let nodeAfterRemoval = actualNode.nextNode;
+                    if (index === this.size) {
+                        nodeRemoved = actualNode.nextNode;
+                        actualNode.nextNode = null;
+                        this.tail = actualNode;
+                        this.size--;
+                    } else if (counter === 1 && index === 1) {
+                        nodeRemoved = actualNode;
+                        this.head = actualNode.nextNode;
+                        this.size--;
+                    } else {
+                        nodeRemoved = actualNode.nextNode;
+                        actualNode.nextNode = nodeRemoved.nextNode;
+                        this.size--;
+                    }
+                    return nodeRemoved;
+                }
+                const next = actualNode.nextNode;
+                actualNode = next;
+                counter++;
+            }
+        } catch (error) {
+            if (error instanceof RangeError) {
+                console.error("Caught a RangeError:", error.message);
+            } else {
+                // Re-throw other, unexpected errors
+                throw error;
+            }
+        }
     }
 }

@@ -1,6 +1,5 @@
 import { LinkedList } from "./LinkedList.js";
 
-// example uses class syntax - adjust as necessary
 const list = new LinkedList();
 
 list.append("dog");
@@ -50,3 +49,24 @@ console.log(`Find dog => ${list.find("dog")}`)
 console.log(`Find ball => ${list.find("ball")}`)
 console.log("Test toString function >>")
 console.log(list.toString());
+
+//Tests for extra features
+console.log("Tests for extra features");
+console.log(list.toString());
+console.log(list.head)
+console.log(list.size)
+console.log(list.tail)
+console.log("Test insertAt function >>")
+console.log(`insertAt(1, "potato", "apple", "banana") =>`)
+list.insertAt(1, "potato", "apple", "banana");
+console.log(list.toString());
+console.log(list.head)
+console.log(list.size)
+console.log(list.tail)
+console.log("Test removeAt function >>")
+console.log(`removeAt(6) =>`)
+list.removeAt(6)
+console.log(list.toString());
+console.log(list.head)
+console.log(list.size)
+console.log(list.tail)
